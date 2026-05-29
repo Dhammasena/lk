@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICM STUDIO — Professional Photography & Cinematography</title>
+    <meta name="description" content="ICM STUDIO — Premium professional photography and cinematography services. Capturing moments, creating timeless stories. Wedding, portrait, event, and commercial photography.">
+    <meta name="keywords" content="ICM STUDIO, photography, cinematography, wedding photography, portrait photography, commercial photography, professional photographer">
+    <meta name="author" content="ICM STUDIO">
+    <meta property="og:title" content="ICM STUDIO — Professional Photography & Cinematography">
+    <meta property="og:description" content="Capturing Moments, Creating Timeless Stories">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0A84FF">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0A84FF',
+                        primaryDark: '#0070E0',
+                        primaryLight: '#3A9BFF',
+                        darkBg: '#050505',
+                        darkCard: '#0A0A0A',
+                        darkBorder: '#1A1A1A',
+                        lightBg: '#FAFAFA',
+                        lightCard: '#FFFFFF',
+                        lightBorder: '#E5E5E5',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-display { font-family: 'Playfair Display', serif; }
+
+        /* Scroll Progress */
+        #scrollProgress {
+            position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+            background: linear-gradient(90deg, #0A84FF, #3A9BFF, #0A84FF);
+            transition: width 0.1s linear;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed; inset: 0; z-index: 10000;
+            background: #000; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        #loader img {
+            width: 180px; animation: loaderPulse 2s ease-in-out infinite;
+        }
+        .loader-bar {
+            width: 200px; height: 2px; background: #1a1a1a; margin-top: 30px;
+            border-radius: 2px; overflow: hidden;
+        }
+        .loader-bar-inner {
+            height: 100%; width: 0%; background: #0A84FF;
+            animation: loaderBar 2.5s ease-in-out forwards;
+        }
+        @keyframes loaderPulse {
+            0%, 100% { opacity: 0.6; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes loaderBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #0A84FF; border-radius: 3px; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-60px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(60px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+        .reveal-scale { opacity: 0; transform: scale(0.85); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+
+        .delay-100 { transition-delay: 0.1s !important; }
+        .delay-200 { transition-delay: 0.2s !important; }
+        .delay-300 { transition-delay: 0.3s !important; }
+        .delay-400 { transition-delay: 0.4s !important; }
+        .delay-500 { transition-delay: 0.5s !important; }
+        .delay-600 { transition-delay: 0.6s !important; }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            background: rgba(10,132,255,0.06);
+            border-color: rgba(10,132,255,0.3);
+            box-shadow: 0 0 40px rgba(10,132,255,0.1), 0 0 80px rgba(10,132,255,0.05);
+            transform: translateY(-8px);
+        }
+
+        .light .glass-card {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .light .glass-card:hover {
+            background: rgba(255,255,255,0.95);
+            border-color: rgba(10,132,255,0.3);
+            box-shadow: 0 0 40px rgba(10,132,255,0.08), 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        /* Hero Canvas */
+        #heroCanvas { position: absolute; inset: 0; z-index: 0; }
+
+        /* Blue Glow */
+        .blue-glow {
+            position: absolute; width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(10,132,255,0.15) 0%, transparent 70%);
+            pointer-events: none; filter: blur(40px);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #0A84FF 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Portfolio Filter */
+        .filter-btn {
+            padding: 8px 24px; border-radius: 50px; font-size: 14px; font-weight: 500;
+            transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent;
+        }
+        .filter-btn.active {
+            background: #0A84FF; color: white; border-color: #0A84FF;
+        }
+        .dark .filter-btn:not(.active) {
+            color: #999; border-color: #333;
+        }
+        .light .filter-btn:not(.active) {
+            color: #666; border-color: #ddd;
+        }
+        .filter-btn:not(.active):hover {
+            border-color: #0A84FF; color: #0A84FF;
+        }
+
+        /* Portfolio Item */
+        .portfolio-item {
+            overflow: hidden; border-radius: 12px; cursor: pointer;
+            position: relative; transition: all 0.5s ease;
+        }
+        .portfolio-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-item:hover img { transform: scale(1.1); }
+        .portfolio-overlay {
+            position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.8) 100%);
+            opacity: 0; transition: opacity 0.4s ease; display: flex; align-items: flex-end; padding: 24px;
+        }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,0.95);
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.4s ease;
+        }
+        #lightbox.show { display: flex; opacity: 1; }
+        #lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+
+        /* Testimonial Carousel */
+        .testimonial-track {
+            display: flex; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Counter Animation */
+        .counter-value { font-variant-numeric: tabular-nums; }
+
+        /* Form Inputs */
+        .form-input {
+            width: 100%; padding: 14px 18px; border-radius: 10px; font-size: 15px;
+            transition: all 0.3s ease; outline: none; font-family: 'Inter', sans-serif;
+        }
+        .dark .form-input {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            color: white;
+        }
+        .light .form-input {
+            background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.1);
+            color: #111;
+        }
+        .form-input:focus {
+            border-color: #0A84FF; box-shadow: 0 0 0 3px rgba(10,132,255,0.15);
+        }
+        .form-input::placeholder { color: #666; }
+
+        /* CTA Button */
+        .btn-primary {
+            background: #0A84FF; color: white; padding: 14px 36px; border-radius: 50px;
+            font-weight: 600; font-size: 15px; display: inline-flex; align-items: center;
+            gap: 8px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
+            border: none; font-family: 'Inter', sans-serif; position: relative; overflow: hidden;
+        }
+        .btn-primary:hover {
+            background: #0070E0; transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(10,132,255,0.3);
+        }
+        .btn-secondary {
+            background: transparent; color: white; padding: 14px 36px; border-radius: 50px;
+            font-weight: 600; font-size: 15px; display: inline-flex; align-items: center;
+            gap: 8px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2); font-family: 'Inter', sans-serif;
+        }
+        .btn-secondary:hover {
+            border-color: #0A84FF; color: #0A84FF; transform: translateY(-2px);
+        }
+        .light .btn-secondary { color: #111; border-color: rgba(0,0,0,0.2); }
+        .light .btn-secondary:hover { border-color: #0A84FF; color: #0A84FF; }
+
+        /* Shutter Animation */
+        @keyframes shutterOpen {
+            0% { clip-path: circle(0% at 50% 50%); }
+            100% { clip-path: circle(100% at 50% 50%); }
+        }
+        .shutter-reveal { animation: shutterOpen 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delay { animation: float 6s ease-in-out 2s infinite; }
+
+        /* Mobile Menu */
+        #mobileMenu {
+            position: fixed; inset: 0; z-index: 8000; background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center;
+            transform: translateX(100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #mobileMenu.open { transform: translateX(0); }
+
+        /* Section Divider */
+        .section-divider {
+            width: 60px; height: 2px; background: #0A84FF; margin: 0 auto;
+        }
+
+        /* WhatsApp Button */
+        #whatsappBtn {
+            position: fixed; bottom: 30px; right: 30px; z-index: 7000;
+            width: 60px; height: 60px; border-radius: 50%; background: #25D366;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4); cursor: pointer;
+            transition: all 0.3s ease; color: white; font-size: 28px;
+        }
+        #whatsappBtn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.5); }
+
+        /* Back to Top */
+        #backToTop {
+            position: fixed; bottom: 100px; right: 34px; z-index: 7000;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: rgba(10,132,255,0.15); border: 1px solid rgba(10,132,255,0.3);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease; color: #0A84FF; font-size: 18px;
+            opacity: 0; visibility: hidden; backdrop-filter: blur(10px);
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; }
+        #backToTop:hover { background: #0A84FF; color: white; transform: translateY(-3px); }
+
+        /* Logo styles */
+        .logo-img {
+            height: 44px; width: auto; transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(10,132,255,0.3));
+        }
+        .logo-img-large {
+            height: 100px; width: auto;
+            filter: drop-shadow(0 0 20px rgba(10,132,255,0.4));
+        }
+        .logo-img-footer {
+            height: 60px; width: auto;
+            filter: drop-shadow(0 0 10px rgba(10,132,255,0.3));
+        }
+
+        /* Noise texture overlay */
+        .noise-overlay {
+            position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #0A84FF; color: white; padding: 16px 32px; border-radius: 12px;
+            font-weight: 500; z-index: 10001; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(10,132,255,0.3);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Map placeholder */
+        .map-container {
+            border-radius: 12px; overflow: hidden; height: 300px;
+            background: linear-gradient(135deg, #0a0a0a, #111);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo-img { height: 36px; }
+            .logo-img-large { height: 70px; }
+            #whatsappBtn { width: 52px; height: 52px; bottom: 20px; right: 20px; font-size: 24px; }
+            #backToTop { width: 40px; height: 40px; bottom: 80px; right: 24px; font-size: 16px; }
+        }
+    </style>
+</head>
+
+<body class="dark bg-darkBg text-white font-body">
+
+<!-- Noise Overlay -->
+<div class="noise-overlay"></div>
+
+<!-- Scroll Progress -->
+<div id="scrollProgress"></div>
+
+<!-- Loading Screen -->
+<div id="loader">
+    <img src="https://z-cdn-media.chatglm.cn/files/1633a52c-677b-4287-952b-af58363cdc65.png?auth_key=1880074062-5122ea5ed6144a2a82e7d6860104e505-0-e54f5110e241ad95d67c778c55670b67" alt="ICM STUDIO" style="border-radius: 8px;">
+    <div class="loader-bar">
+        <div class="loader-bar-inner"></div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-[8500] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <a href="#home" class="relative z-10">
+                <img src="https://z-cdn-media.chatglm.cn/files/1633a52c-677b-4287-952b-af58363cdc65.png?auth_key=1880074062-5122ea5ed6144a2a82e7d6860104e505-0-e54f5110e241ad95d67c778c55670b67" alt="ICM STUDIO" class="logo-img rounded">
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#home" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">Home</a>
+                <a href="#about" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">About</a>
+                <a href="#services" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">Services</a>
+                <a href="#portfolio" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">Portfolio</a>
+                <a href="#testimonials" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="nav-link text-sm font-medium tracking-wide text-gray-300 hover:text-primary transition-colors duration-300">Contact</a>
+                <!-- Dark/Light Toggle -->
+                <button id="themeToggle" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-all duration-300">
+                    <i class="fas fa-moon text-sm" id="themeIcon"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="hamburger" class="lg:hidden relative z-10 w-10 h-10 flex flex-col items-center justify-center gap-1.5">
+                <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+                <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+                <span class="hamburger-line w-4 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu">
+    <div class="text-center space-y-8">
+        <a href="#home" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">Home</a>
+        <a href="#about" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">About</a>
+        <a href="#services" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">Services</a>
+        <a href="#portfolio" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">Portfolio</a>
+        <a href="#testimonials" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">Testimonials</a>
+        <a href="#contact" class="mobile-link block text-3xl font-display font-medium text-white hover:text-primary transition-colors">Contact</a>
+        <button id="themeToggleMobile" class="mt-4 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:text-primary hover:border-primary transition-all duration-300 mx-auto">
+            <i class="fas fa-moon text-lg"></i>
+        </button>
+    </div>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <canvas id="heroCanvas"></canvas>
+
+    <!-- Blue Glows -->
+    <div class="blue-glow" style="top: -200px; right: -100px;" id="glow1"></div>
+    <div class="blue-glow" style="bottom: -200px; left: -100px;" id="glow2"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto" id="heroContent">
+        <!-- Logo -->
+        <div class="mb-8 shutter-reveal">
+            <img src="https://z-cdn-media.chatglm.cn/files/1633a52c-677b-4287-952b-af58363cdc65.png?auth_key=1880074062-5122ea5ed6144a2a82e7d6860104e505-0-e54f5110e241ad95d67c778c55670b67" alt="ICM STUDIO" class="logo-img-large mx-auto rounded-xl">
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
+            <span class="block reveal">Capturing Moments,</span>
+            <span class="block reveal delay-200 gradient-text">Creating Timeless Stories</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 reveal delay-300 leading-relaxed">
+            Professional Photography & Visual Storytelling
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center reveal delay-400">
+            <a href="#portfolio" class="btn-primary">
+                <i class="fas fa-images"></i> View Portfolio
+            </a>
+            <a href="#booking" class="btn-secondary">
+                <i class="fas fa-calendar-check"></i> Book a Session
+            </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 reveal delay-600">
+            <div class="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
+                <div class="w-1.5 h-3 bg-primary rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="blue-glow float" style="top: 50%; left: -250px; opacity: 0.5;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            <!-- Left: Image -->
+            <div class="reveal-left relative">
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/5]">
+                    <img src="https://picsum.photos/seed/icmstudio-about/800/1000.jpg" alt="ICM STUDIO Photographer" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                </div>
+                <!-- Floating Badge -->
+                <div class="absolute -bottom-6 -right-6 sm:bottom-8 sm:right-[-30px] bg-primary text-white px-6 py-4 rounded-xl shadow-2xl shadow-primary/30 float-delay">
+                    <div class="text-3xl font-bold font-display">5+</div>
+                    <div class="text-sm font-medium opacity-90">Years of Excellence</div>
+                </div>
+                <!-- Blue accent border -->
+                <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-primary rounded-tl-2xl"></div>
+            </div>
+
+            <!-- Right: Content -->
+            <div class="reveal-right">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                    ABOUT US
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                    We Turn Moments Into <span class="gradient-text">Masterpieces</span>
+                </h2>
+                <p class="text-gray-400 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                    At ICM STUDIO, we believe every moment carries a story waiting to be told. Founded with a passion for visual storytelling, our team of dedicated professionals brings years of expertise in capturing life's most precious moments.
+                </p>
+                <p class="text-gray-400 dark:text-gray-400 leading-relaxed mb-10">
+                    From intimate weddings to grand commercial shoots, we approach each project with an artist's eye and a professional's precision. Our cinematic approach to photography ensures every frame tells a compelling story that resonates for generations.
+                </p>
+
+                <!-- Counters -->
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl font-bold text-primary font-display counter-value" data-target="500">0</div>
+                        <div class="text-sm text-gray-500 mt-1">Projects</div>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl font-bold text-primary font-display counter-value" data-target="200">0</div>
+                        <div class="text-sm text-gray-500 mt-1">Happy Clients</div>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl sm:text-4xl font-bold text-primary font-display counter-value" data-target="5">0</div>
+                        <div class="text-sm text-gray-500 mt-1">Years Exp.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES SECTION ===== -->
+<section id="services" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="blue-glow float-delay" style="top: 30%; right: -250px; opacity: 0.4;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 reveal">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                OUR SERVICES
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                What We <span class="gradient-text">Offer</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                Premium photography and cinematography services tailored to capture your most important moments
+            </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <!-- Service 1 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-100">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Wedding Photography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Capturing the magic of your special day with timeless elegance and emotional depth that tells your unique love story.</p>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-200">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Portrait Photography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Revealing personality and emotion through stunning portrait sessions that showcase the authentic beauty in every individual.</p>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-300">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-calendar-star"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Event Photography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Documenting every significant moment of your events with professional precision and creative flair that brings memories alive.</p>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-100">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Product Photography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Showcasing your products with impeccable detail and lighting that elevates your brand and drives customer engagement.</p>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-200">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Commercial Photography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Powerful commercial imagery that communicates your brand message with clarity, impact, and cinematic quality.</p>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="glass-card rounded-2xl p-8 reveal delay-300">
+                <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary text-2xl">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3 font-display">Cinematic Videography</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Crafting cinematic stories through motion pictures that capture the essence and emotion of every moment in vivid detail.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PORTFOLIO SECTION ===== -->
+<section id="portfolio" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 reveal">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                OUR WORK
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                Featured <span class="gradient-text">Portfolio</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                A curated selection of our finest work across different genres and styles
+            </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="weddings">Weddings</button>
+            <button class="filter-btn" data-filter="portraits">Portraits</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="commercial">Commercial</button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5" id="portfolioGrid">
+            <!-- Item 1 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale" data-category="weddings">
+                <img src="https://picsum.photos/seed/icm-wed1/600/800.jpg" alt="Wedding Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Eternal Vows</h4>
+                        <p class="text-gray-300 text-sm">Wedding Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-100" data-category="portraits">
+                <img src="https://picsum.photos/seed/icm-port1/600/750.jpg" alt="Portrait Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Inner Light</h4>
+                        <p class="text-gray-300 text-sm">Portrait Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-200" data-category="commercial">
+                <img src="https://picsum.photos/seed/icm-com1/600/600.jpg" alt="Commercial Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Brand Vision</h4>
+                        <p class="text-gray-300 text-sm">Commercial Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale" data-category="events">
+                <img src="https://picsum.photos/seed/icm-evt1/600/700.jpg" alt="Event Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Grand Celebration</h4>
+                        <p class="text-gray-300 text-sm">Event Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-100" data-category="weddings">
+                <img src="https://picsum.photos/seed/icm-wed2/600/900.jpg" alt="Wedding Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Golden Hour</h4>
+                        <p class="text-gray-300 text-sm">Wedding Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-200" data-category="portraits">
+                <img src="https://picsum.photos/seed/icm-port2/600/850.jpg" alt="Portrait Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Pure Elegance</h4>
+                        <p class="text-gray-300 text-sm">Portrait Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale" data-category="commercial">
+                <img src="https://picsum.photos/seed/icm-com2/600/750.jpg" alt="Commercial Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Product Luxe</h4>
+                        <p class="text-gray-300 text-sm">Commercial Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-100" data-category="events">
+                <img src="https://picsum.photos/seed/icm-evt2/600/600.jpg" alt="Event Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Night Gala</h4>
+                        <p class="text-gray-300 text-sm">Event Photography</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="portfolio-item break-inside-avoid reveal-scale delay-200" data-category="weddings">
+                <img src="https://picsum.photos/seed/icm-wed3/600/700.jpg" alt="Wedding Photography" loading="lazy">
+                <div class="portfolio-overlay">
+                    <div>
+                        <h4 class="text-white font-bold text-lg font-display">Sacred Bond</h4>
+                        <p class="text-gray-300 text-sm">Wedding Photography</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TESTIMONIALS SECTION ===== -->
+<section id="testimonials" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="blue-glow float" style="top: 20%; left: -200px; opacity: 0.3;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 reveal">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                TESTIMONIALS
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                What Our Clients <span class="gradient-text">Say</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                Real stories from real clients who trusted us with their most precious moments
+            </p>
+        </div>
+
+        <!-- Carousel -->
+        <div class="relative overflow-hidden reveal" id="testimonialCarousel">
+            <div class="testimonial-track" id="testimonialTrack">
+                <!-- Testimonial 1 -->
+                <div class="w-full flex-shrink-0 px-4">
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 max-w-3xl mx-auto text-center">
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                        <p class="text-gray-300 dark:text-gray-300 text-lg leading-relaxed mb-8 italic font-display">
+                            "ICM STUDIO captured our wedding day with such artistry and emotion. Every photo tells a story, and looking back at our album brings tears of joy every single time. Absolutely world-class!"
+                        </p>
+                        <img src="https://picsum.photos/seed/client1/80/80.jpg" alt="Sarah & James" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-primary/30 object-cover">
+                        <div class="font-bold">Sarah & James Mitchell</div>
+                        <div class="text-sm text-gray-500">Wedding Client</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="w-full flex-shrink-0 px-4">
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 max-w-3xl mx-auto text-center">
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                        <p class="text-gray-300 dark:text-gray-300 text-lg leading-relaxed mb-8 italic font-display">
+                            "The team at ICM STUDIO transformed our corporate event into a visual masterpiece. Their professionalism and creative vision exceeded all our expectations. Highly recommended!"
+                        </p>
+                        <img src="https://picsum.photos/seed/client2/80/80.jpg" alt="David Chen" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-primary/30 object-cover">
+                        <div class="font-bold">David Chen</div>
+                        <div class="text-sm text-gray-500">Corporate Client</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="w-full flex-shrink-0 px-4">
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 max-w-3xl mx-auto text-center">
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                        <p class="text-gray-300 dark:text-gray-300 text-lg leading-relaxed mb-8 italic font-display">
+                            "My portrait session was an incredible experience. They made me feel so comfortable and the final images were beyond anything I imagined. True artists at work!"
+                        </p>
+                        <img src="https://picsum.photos/seed/client3/80/80.jpg" alt="Amira Rodriguez" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-primary/30 object-cover">
+                        <div class="font-bold">Amira Rodriguez</div>
+                        <div class="text-sm text-gray-500">Portrait Client</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="w-full flex-shrink-0 px-4">
+                    <div class="glass-card rounded-2xl p-8 sm:p-10 max-w-3xl mx-auto text-center">
+                        <div class="flex justify-center mb-4">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                        <p class="text-gray-300 dark:text-gray-300 text-lg leading-relaxed mb-8 italic font-display">
+                            "The product photography ICM STUDIO delivered for our brand was phenomenal. Sales increased 40% after we updated our catalog with their stunning images. Worth every penny!"
+                        </p>
+                        <img src="https://picsum.photos/seed/client4/80/80.jpg" alt="Michael Torres" class="w-14 h-14 rounded-full mx-auto mb-3 border-2 border-primary/30 object-cover">
+                        <div class="font-bold">Michael Torres</div>
+                        <div class="text-sm text-gray-500">Commercial Client</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nav Arrows -->
+            <button id="prevTestimonial" class="absolute left-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-300 z-10">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="nextTestimonial" class="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary transition-all duration-300 z-10">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Dots -->
+            <div class="flex justify-center gap-3 mt-8" id="testimonialDots">
+                <button class="w-3 h-3 rounded-full bg-primary transition-all duration-300" data-index="0"></button>
+                <button class="w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="1"></button>
+                <button class="w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="2"></button>
+                <button class="w-3 h-3 rounded-full bg-white/20 transition-all duration-300" data-index="3"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATISTICS SECTION ===== -->
+<section class="py-20 relative overflow-hidden border-y border-white/5 dark:border-white/5">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div class="text-center reveal">
+                <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary font-display counter-value" data-target="500">0</div>
+                <div class="text-gray-400 mt-2 text-sm sm:text-base">Projects Completed</div>
+            </div>
+            <div class="text-center reveal delay-100">
+                <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary font-display counter-value" data-target="200">0</div>
+                <div class="text-gray-400 mt-2 text-sm sm:text-base">Happy Clients</div>
+            </div>
+            <div class="text-center reveal delay-200">
+                <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary font-display counter-value" data-target="1000">0</div>
+                <div class="text-gray-400 mt-2 text-sm sm:text-base">Photos Delivered</div>
+            </div>
+            <div class="text-center reveal delay-300">
+                <div class="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary font-display counter-value" data-target="50">0</div>
+                <div class="text-gray-400 mt-2 text-sm sm:text-base">Events Covered</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BOOKING SECTION ===== -->
+<section id="booking" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="blue-glow float-delay" style="bottom: -200px; right: -200px; opacity: 0.3;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <!-- Left: Info -->
+            <div class="reveal-left">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                    BOOK A SESSION
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                    Let's Create <span class="gradient-text">Something Beautiful</span>
+                </h2>
+                <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                    Ready to bring your vision to life? Book your photography or videography session with us. We'll work together to create stunning visuals that tell your unique story.
+                </p>
+
+                <!-- Logo display -->
+                <div class="glass-card rounded-2xl p-8 inline-block">
+                    <img src="https://z-cdn-media.chatglm.cn/files/1633a52c-677b-4287-952b-af58363cdc65.png?auth_key=1880074062-5122ea5ed6144a2a82e7d6860104e505-0-e54f5110e241ad95d67c778c55670b67" alt="ICM STUDIO" class="h-16 rounded-lg">
+                    <p class="text-gray-400 text-sm mt-4">Premium Photography & Cinematography</p>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="reveal-right">
+                <form id="bookingForm" class="glass-card rounded-2xl p-8 sm:p-10 space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Full Name</label>
+                            <input type="text" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Email Address</label>
+                        <input type="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Event Type</label>
+                            <select class="form-input" required>
+                                <option value="">Select type...</option>
+                                <option>Wedding Photography</option>
+                                <option>Portrait Photography</option>
+                                <option>Event Photography</option>
+                                <option>Product Photography</option>
+                                <option>Commercial Photography</option>
+                                <option>Cinematic Videography</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Preferred Date</label>
+                            <input type="date" class="form-input" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Message</label>
+                        <textarea class="form-input" rows="4" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full justify-center text-base">
+                        <i class="fas fa-paper-plane"></i> Book Your Session
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="blue-glow float" style="top: -150px; left: -200px; opacity: 0.3;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16 reveal">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-6">
+                GET IN TOUCH
+            </div>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+                Contact <span class="gradient-text">Us</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                Have a question or want to discuss a project? We'd love to hear from you
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            <!-- Left: Contact Info + Map -->
+            <div class="reveal-left space-y-8">
+                <!-- Contact Cards -->
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="glass-card rounded-xl p-6 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm mb-1">Phone</div>
+                            <a href="tel:+15551234567" class="text-gray-400 text-sm hover:text-primary transition-colors">+1 (555) 123-4567</a>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm mb-1">Email</div>
+                            <a href="mailto:hello@icmstudio.com" class="text-gray-400 text-sm hover:text-primary transition-colors">hello@icmstudio.com</a>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fab fa-whatsapp text-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm mb-1">WhatsApp</div>
+                            <a href="https://wa.me/15551234567" target="_blank" class="text-gray-400 text-sm hover:text-primary transition-colors">+1 (555) 123-4567</a>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-location-dot text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-sm mb-1">Location</div>
+                            <p class="text-gray-400 text-sm">123 Creative Ave, NY 10001</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9476519598093!2d-73.98823168459414!3d40.74844097932847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1640000000000!5m2!1sen!2sus"
+                        width="100%" height="300" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-gray-500 font-medium">Follow Us:</span>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="reveal-right">
+                <form id="contactForm" class="glass-card rounded-2xl p-8 sm:p-10 space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Your Name</label>
+                            <input type="text" class="form-input" placeholder="Full Name" required>
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-300 mb-2 block">Your Email</label>
+                            <input type="email" class="form-input" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Subject</label>
+                        <input type="text" class="form-input" placeholder="How can we help?" required>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-gray-300 mb-2 block">Message</label>
+                        <textarea class="form-input" rows="5" placeholder="Write your message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full justify-center text-base">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="pt-16 pb-8 relative overflow-hidden border-t border-white/5 dark:border-white/5">
+    <!-- Blue Divider Line -->
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            <!-- Brand -->
+            <div class="lg:col-span-1">
+                <img src="https://z-cdn-media.chatglm.cn/files/1633a52c-677b-4287-952b-af58363cdc65.png?auth_key=1880074062-5122ea5ed6144a2a82e7d6860104e505-0-e54f5110e241ad95d67c778c55670b67" alt="ICM STUDIO" class="logo-img-footer rounded mb-4">
+                <p class="text-gray-500 text-sm leading-relaxed">Capturing moments, creating timeless stories. Premium photography and cinematography services for discerning clients worldwide.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-4 text-primary">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="#home" class="text-gray-400 text-sm hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 text-sm hover:text-primary transition-colors">About Us</a></li>
+                    <li><a href="#services" class="text-gray-400 text-sm hover:text-primary transition-colors">Services</a></li>
+                    <li><a href="#portfolio" class="text-gray-400 text-sm hover:text-primary transition-colors">Portfolio</a></li>
+                    <li><a href="#contact" class="text-gray-400 text-sm hover:text-primary transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-4 text-primary">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">Wedding Photography</a></li>
+                    <li><a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">Portrait Photography</a></li>
+                    <li><a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">Event Photography</a></li>
+                    <li><a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">Commercial Photography</a></li>
+                    <li><a href="#" class="text-gray-400 text-sm hover:text-primary transition-colors">Cinematic Videography</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-4 text-primary">Connect</h4>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">hello@icmstudio.com</p>
+                <p class="text-gray-500 text-sm">+1 (555) 123-4567</p>
+            </div>
+        </div>
+
+        <!-- Bottom Divider -->
+        <div class="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-8"></div>
+
+        <!-- Copyright -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 text-sm">
+            <p>&copy; 2025 ICM STUDIO. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/15551234567" target="_blank" id="whatsappBtn" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Back to Top -->
+<button id="backToTop" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 text-white text-3xl hover:text-primary transition-colors z-10" onclick="closeLightbox()">
+        <i class="fas fa-times"></i>
+    </button>
+    <img id="lightboxImg" src="" alt="Portfolio Image">
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">Message sent successfully!</div>
+
+<script>
+// ===== LOADING SCREEN =====
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        initHeroAnimations();
+    }, 2800);
+});
+
+// ===== HERO PARTICLE CANVAS =====
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = 0, mouseY = 0;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+    constructor() {
+        this.reset();
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Mouse interaction
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+            this.x -= dx * 0.01;
+            this.y -= dy * 0.01;
+        }
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(10, 132, 255, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    particles = [];
+    const count = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
+    for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+    }
+}
+initParticles();
+
+function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(10, 132, 255, ${0.08 * (1 - dist / 120)})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    connectParticles();
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== MOUSE PARALLAX =====
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    const heroContent = document.getElementById('heroContent');
+    if (heroContent) {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.015;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.015;
+        heroContent.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    }
+
+    // Move blue glows
+    const glow1 = document.getElementById('glow1');
+    const glow2 = document.getElementById('glow2');
+    if (glow1) {
+        glow1.style.transform = `translate(${(e.clientX - window.innerWidth / 2) * 0.03}px, ${(e.clientY - window.innerHeight / 2) * 0.03}px)`;
+    }
+    if (glow2) {
+        glow2.style.transform = `translate(${(e.clientX - window.innerWidth / 2) * -0.02}px, ${(e.clientY - window.innerHeight / 2) * -0.02}px)`;
+    }
+});
+
+function initHeroAnimations() {
+    // Trigger reveal animations for hero elements
+    const reveals = document.querySelectorAll('#home .reveal');
+    reveals.forEach((el, i) => {
+        setTimeout(() => el.classList.add('active'), 300 + i * 150);
+    });
+}
+
+// ===== SCROLL PROGRESS =====
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    scrollProgress.style.width = progress + '%';
+});
+
+// ===== NAVBAR SCROLL EFFECT =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(0,0,0,0.85)';
+        navbar.style.backdropFilter = 'blur(20px)';
+        navbar.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.borderBottom = 'none';
+    }
+});
+
+// ===== MOBILE MENU =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const hamburgerLines = document.querySelectorAll('.hamburger-line');
+let menuOpen = false;
+
+hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open');
+    if (menuOpen) {
+        hamburgerLines[0].style.transform = 'rotate(45deg) translateY(4px)';
+        hamburgerLines[1].style.opacity = '0';
+        hamburgerLines[2].style.transform = 'rotate(-45deg) translateY(-6px)';
+        hamburgerLines[2].style.width = '24px';
+        document.body.style.overflow = 'hidden';
+    } else {
+        hamburgerLines[0].style.transform = 'none';
+        hamburgerLines[1].style.opacity = '1';
+        hamburgerLines[2].style.transform = 'none';
+        hamburgerLines[2].style.width = '16px';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close mobile menu on link click
+document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.classList.remove('open');
+        hamburgerLines[0].style.transform = 'none';
+        hamburgerLines[1].style.opacity = '1';
+        hamburgerLines[2].style.transform = 'none';
+        hamburgerLines[2].style.width = '16px';
+        document.body.style.overflow = 'auto';
+    });
+});
+
+// ===== SMOOTH SCROLLING =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// ===== SCROLL REVEAL ANIMATIONS =====
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    observer.observe(el);
+});
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(easeOut * target);
+        el.textContent = current + '+';
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = 'true';
+            animateCounter(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter-value').forEach(el => {
+    counterObserver.observe(el);
+});
+
+// ===== PORTFOLIO FILTERS =====
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        portfolioItems.forEach(item => {
+            if (filter === 'all' || item.dataset.category === filter) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 50);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 400);
+            }
+        });
+    });
+});
+
+// ===== LIGHTBOX =====
+const portfolioImages = document.querySelectorAll('.portfolio-item');
+portfolioImages.forEach(item => {
+    item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+        requestAnimationFrame(() => lightbox.classList.add('show'));
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('show');
+    setTimeout(() => {
+        lightbox.style.display = 'none';
+    }, 400);
+    document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+// ===== TESTIMONIAL CAROUSEL =====
+let currentTestimonial = 0;
+const testimonialTrack = document.getElementById('testimonialTrack');
+const totalTestimonials = 4;
+let autoSlideInterval;
+
+function goToTestimonial(index) {
+    currentTestimonial = index;
+    testimonialTrack.style.transform = `translateX(-${index * 100}%)`;
+
+    // Update dots
+    document.querySelectorAll('#testimonialDots button').forEach((dot, i) => {
+        dot.className = i === index
+            ? 'w-8 h-3 rounded-full bg-primary transition-all duration-300'
+            : 'w-3 h-3 rounded-full bg-white/20 transition-all duration-300';
+    });
+}
+
+document.getElementById('prevTestimonial').addEventListener('click', () => {
+    goToTestimonial(currentTestimonial > 0 ? currentTestimonial - 1 : totalTestimonials - 1);
+    resetAutoSlide();
+});
+
+document.getElementById('nextTestimonial').addEventListener('click', () => {
+    goToTestimonial(currentTestimonial < totalTestimonials - 1 ? currentTestimonial + 1 : 0);
+    resetAutoSlide();
+});
+
+document.querySelectorAll('#testimonialDots button').forEach(dot => {
+    dot.addEventListener('click', () => {
+        goToTestimonial(parseInt(dot.dataset.index));
+        resetAutoSlide();
+    });
+});
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        goToTestimonial(currentTestimonial < totalTestimonials - 1 ? currentTestimonial + 1 : 0);
+    }, 5000);
+}
+
+function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+}
+
+startAutoSlide();
+
+// ===== DARK/LIGHT MODE TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const themeToggleMobile = document.getElementById('themeToggleMobile');
+const themeIcon = themeToggle.querySelector('i');
+let isDark = true;
+
+function toggleTheme() {
+    isDark = !isDark;
+    const html = document.documentElement;
+
+    if (isDark) {
+        html.classList.add('dark');
+        html.classList.remove('light');
+        document.body.classList.add('bg-darkBg', 'text-white');
+        document.body.classList.remove('bg-lightBg', 'text-black');
+        themeIcon.className = 'fas fa-moon text-sm';
+        themeToggleMobile.querySelector('i').className = 'fas fa-moon text-lg';
+    } else {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        document.body.classList.remove('bg-darkBg', 'text-white');
+        document.body.classList.add('bg-lightBg', 'text-black');
+        themeIcon.className = 'fas fa-sun text-sm';
+        themeToggleMobile.querySelector('i').className = 'fas fa-sun text-lg';
+    }
+
+    // Update navbar scroll state
+    if (window.scrollY > 50) {
+        navbar.style.background = isDark ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.9)';
+    }
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+themeToggleMobile.addEventListener('click', toggleTheme);
+
+// ===== BACK TO TOP =====
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ===== FORM SUBMISSIONS =====
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('🎬 Booking request submitted! We\'ll contact you shortly.');
+    e.target.reset();
+});
+
+document.getElementById('contactForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    showToast('✉️ Message sent successfully! We\'ll get back to you soon.');
+    e.target.reset();
+});
+
+// ===== ACTIVE NAV LINK ON SCROLL =====
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY + 200;
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+        if (navLink) {
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLink.classList.add('text-primary');
+                navLink.classList.remove('text-gray-300');
+            } else {
+                navLink.classList.remove('text-primary');
+                navLink.classList.add('text-gray-300');
+            }
+        }
+    });
+});
+
+// ===== NAVBAR THEME AWARENESS =====
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        if (isDark) {
+            navbar.style.background = 'rgba(0,0,0,0.85)';
+        } else {
+            navbar.style.background = 'rgba(255,255,255,0.9)';
+            navbar.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+        }
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.borderBottom = 'none';
+    }
+});
+
+// ===== LIGHT MODE STYLES =====
+const lightModeStyle = document.createElement('style');
+lightModeStyle.textContent = `
+    .light { background-color: #FAFAFA; color: #111; }
+    .light .glass-card { background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.08); }
+    .light .glass-card:hover { background: rgba(255,255,255,0.95); border-color: rgba(10,132,255,0.3); box-shadow: 0 0 40px rgba(10,132,255,0.08), 0 20px 60px rgba(0,0,0,0.08); }
+    .light .gradient-text { background: linear-gradient(135deg, #111 0%, #0A84FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .light .portfolio-overlay { background: linear-gradient(180deg, transparent 30%, rgba(255,255,255,0.9) 100%); }
+    .light .portfolio-overlay h4 { color: #111; }
+    .light .portfolio-overlay p { color: #666; }
+    .light #heroCanvas { opacity: 0.3; }
+    .light .nav-link { color: #555 !important; }
+    .light .nav-link:hover, .light .nav-link.text-primary { color: #0A84FF !important; }
+    .light .hamburger-line { background: #111 !important; }
+    .light .form-input { background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.1); color: #111; }
+    .light .form-input:focus { border-color: #0A84FF; box-shadow: 0 0 0 3px rgba(10,132,255,0.15); }
+    .light .text-gray-400 { color: #666 !important; }
+    .light .text-gray-500 { color: #888 !important; }
+    .light .border-white\\/5 { border-color: rgba(0,0,0,0.05) !important; }
+    .light .bg-white\\/5 { background: rgba(0,0,0,0.04); }
+    .light .border-white\\/10 { border-color: rgba(0,0,0,0.1); }
+    .light #mobileMenu { background: rgba(255,255,255,0.98); }
+    .light .mobile-link { color: #111 !important; }
+    .light .filter-btn:not(.active) { color: #666; border-color: #ddd; }
+    .light .btn-secondary { color: #111; border-color: rgba(0,0,0,0.2); }
+    .light .btn-secondary:hover { border-color: #0A84FF; color: #0A84FF; }
+    .light .map-container { background: linear-gradient(135deg, #f0f0f0, #e0e0e0); }
+    .light #backToTop { background: rgba(10,132,255,0.1); border-color: rgba(10,132,255,0.2); }
+    .light .blue-glow { opacity: 0.15 !important; }
+    .light footer { border-color: rgba(0,0,0,0.05) !important; }
+    .light .noise-overlay { opacity: 0.01; }
+`;
+document.head.appendChild(lightModeStyle);
+</script>
+</body>
+</html>
